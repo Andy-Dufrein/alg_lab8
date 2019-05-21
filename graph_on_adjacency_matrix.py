@@ -34,7 +34,7 @@ class AdjMatrixGraph:
                           np.zeros((rows + n, n))))
 
     def remove_vertex(self, v):
-        """ Удалить вершину из графа
+        """ Удаляет вершину из графа
 
         :param int v: индекс вершинаы графа
         """
@@ -49,27 +49,32 @@ class AdjMatrixGraph:
         return len(self.attributes)
 
     def add_edge(self, u, v):
-        """ Добавить ребро, соединяющее вершины с индексами u и v
+        """ Добавляет ребро, соединяющее вершины с индексами u и v
 
         :param int u: индекс вершины графа
         :param int v: индекс вершины графа
         """
-        raise NotImplemented("Реализуйте этот метод")
+        self.adj[u][v]=1
+        self.adj[v][u]=1
+#        raise NotImplemented("Реализуйте этот метод")
 
     def remove_edge(self, u, v):
-        """ Удалить ребро, соединяющее вершины с индексами u и v
+        """ Удаляет ребро, соединяющее вершины с индексами u и v
 
         :param int u: индекс вершины графа
         :param int v: индекс вершины графа
         """
-        raise NotImplemented("Реализуйте этот метод")
+        self.adj[u][v]=0
+        self.adj[v][u]=0
+#        raise NotImplemented("Реализуйте этот метод")
 
     def number_of_edges(self):
         """ Возвращает количество ребер в графе
 
         :rtype: int
         """
-        raise NotImplemented("Реализуйте этот метод")
+        return int(self.adj.sum()/2)
+#        raise NotImplemented("Реализуйте этот метод")
 
     def neighbors(self, v):
         """ Возвращает список индексов вершин, соседних с данной
@@ -77,9 +82,14 @@ class AdjMatrixGraph:
         :param int v: индекс вершины графа
         :rtype: list of int
         """
-        raise NotImplemented("Реализуйте этот метод")
+        neighbor=list()
+        for i in range(len(self.adj[v])):
+            if self.adj[v][i] == 1:
+                neighbor.append(i)
+        return neighbor
+#        raise NotImplemented("Реализуйте этот метод")
 
-    def draw(self, filename='test.gv'):
+    def draw(self, filename='test_mat.gv'):
         """
         Отрисовывает граф используя библиотеку Graphviz. Больше примеров:
         https://graphviz.readthedocs.io/en/stable/examples.html
@@ -112,7 +122,9 @@ def main():
     g.add_vertices(5)
     for i, c in zip(range(5), string.ascii_lowercase):
         g.attributes[i]['name'] = c
-
+    
+    print(g.adj)
+    print(g.attributes)
     g.add_edge(0, 1)
     g.add_edge(1, 2)
     g.add_edge(2, 3)
@@ -122,7 +134,8 @@ def main():
     g.remove_edge(1, 2)
     print(g.number_of_edges())
     print(g.number_of_vertices())
-    print(g.neighbors(0))
+    print(g.neighbors(1))
+    print(g.adj)
     g.draw()
 
 

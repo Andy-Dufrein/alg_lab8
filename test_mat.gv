@@ -1,0 +1,17 @@
+graph G {
+	node [color="" fillcolor="" fontcolor="" style=""]
+	0 [label="a (0)"]
+	node [color="" fillcolor="" fontcolor="" style=""]
+	1 [label="b (1)"]
+	node [color="" fillcolor="" fontcolor="" style=""]
+	2 [label="c (2)"]
+	node [color="" fillcolor="" fontcolor="" style=""]
+	3 [label="d (3)"]
+	node [color="" fillcolor="" fontcolor="" style=""]
+	4 [label="e (4)"]
+	0 -- 1
+	1 -- 3
+	1 -- 4
+	2 -- 3
+	3 -- 4
+}
